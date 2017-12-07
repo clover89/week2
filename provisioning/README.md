@@ -2,10 +2,10 @@
 
 ## Introduction
 Once you have setup Jenkins on an AWS instance and it‘s setup to build and test your project after each commit to github. It is time to add a deployment step to spin up a new AWS instance (if needed) and deploy the latest version of your application to production.
- 
+
 ## Implementation
 Implementing continuous deployment for the first time can be difficult the first time so I recommend you read all of the following sections before you start.
- 
+
 ### Deployment Step
 Start by adding a deployment step into your Jenkins-file or pipeline.
 Note: The deployment step should only run if all previous steps (building, testing etc) finished successfully.
@@ -14,7 +14,7 @@ Your deployment step should look something like this:
 # Jenkins GitHub Plugin has a GIT_COMMIT environment variable set for you.
 ./provision-new-environment.sh
 ~~~
- 
+
 ### Deployment Script
 In week 2 this script is called provision-new-environment.sh and checks for a GIT_COMMIT environment variable.
 Environment Variables:
@@ -67,7 +67,7 @@ The script copies the files needed to the aws instance, and executes them to dep
 
 #### Wait If Instance Is Ready (ec2-instance-check.sh)
 
-If you look at ec2-instance-init.sh you can see that at the end it creates a new file called ec2-init-done.markerfile. This script is copied to and executed on the instance in update-env.sh to make sure all dependencies are installed before trying to deploying to the instance. 
+If you look at ec2-instance-init.sh you can see that at the end it creates a new file called ec2-init-done.markerfile. This script is copied to and executed on the instance in update-env.sh to make sure all dependencies are installed before trying to deploying to the instance.
 (Should be executed inside the AWS instance).
 
 ~~~bash
