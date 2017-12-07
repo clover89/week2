@@ -9,7 +9,7 @@ node {
         sh 'npm run testJenkins'
     }
     stage('Deploy') {
-        # Jenkins GitHub Plugin has a GIT_COMMIT environment variable set for you.
-        # ./provision-new-environment.sh
+        // Jenkins GitHub Plugin has a GIT_COMMIT environment variable set for you.
+        // ./provision-new-environment.sh
     }
 }
