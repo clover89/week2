@@ -24,3 +24,5 @@ fi
 
 INSTANCE_PUBLIC_NAME=$(cat ~/ec2_instance/instance-public-name.txt)
 source ./update-env.sh ${INSTANCE_PUBLIC_NAME}
+
+echo New environment provisioned
