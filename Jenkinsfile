@@ -3,6 +3,7 @@ node {
     stage('Build') {
         echo 'Building...'
         sh 'npm install'
+        sh 'cd client && npm install'
     }
     stage('Test') {
         echo 'Testing...'
