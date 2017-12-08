@@ -2,8 +2,8 @@ node {
     checkout scm
     stage('Build') {
         echo 'Building...'
-        sh 'npm install'
-        sh 'cd client && npm install'
+        sh 'yarn install'
+        sh 'cd client && yarn install'
     }
     stage('Test') {
         echo 'Testing...'
