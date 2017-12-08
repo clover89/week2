@@ -10,6 +10,7 @@ node {
     }
     stage('Deploy') {
         echo 'Deploying...'
-        sh './provision-new-environment.sh'
+        sh 'cd provisioning && ./provision-new-environment.sh'
+        
     }
 }
