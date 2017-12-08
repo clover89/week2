@@ -47,7 +47,7 @@ To create a new instance we need two scripts:
 * docker-instance-init.sh
 
 #### Create Instance (create-aws-docker-host-instance.sh)
-In week 2 you are given a script called create-aws-docker-host-instance.sh which looks for information associated with the instance in it's working directory (./ec2_instance) you will have to modify the code to look for the informatiosn in Jenkins user's home directory.
+In week 2 you are given a script called create-aws-docker-host-instance.sh which looks for information associated with the instance in it's working directory (~/ec2_instance) you will have to modify the code to look for the informatiosn in Jenkins user's home directory.
 
 #### Initialize Instance (docker-instance-init.sh)
 This is the script that is executed when spinning up a new AWS instance, we use it here to install programs needed to run our application.
@@ -61,7 +61,7 @@ To update a running instance we need one script:
 
 #### Deploy To Instance (update-env.sh)
 
-In week 2 you are given a script called update-env.sh which looks for information associated with the instance in it's working directory (./ec2_instance) you will have to modify the code to look for the informatiosn in Jenkins user's home directory.
+In week 2 you are given a script called update-env.sh which looks for information associated with the instance in it's working directory (~/ec2_instance) you will have to modify the code to look for the informatiosn in Jenkins user's home directory.
 
 The script copies the files needed to the aws instance, and executes them to deploy the application.
 

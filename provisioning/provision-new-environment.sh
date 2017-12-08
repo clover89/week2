@@ -13,7 +13,7 @@ fi
 #  echo New environment provisioned
 #else
 #  echo Instance already running, updating...
-#  INSTANCE_PUBLIC_NAME_=$(cat ./ec2_instance/instance-public-name.txt)
+#  INSTANCE_PUBLIC_NAME_=$(cat ~/ec2_instance/instance-public-name.txt)
 #  source ./update-env.sh ${INSTANCE_PUBLIC_NAME_}
 #  echo Environment updated
 #fi
