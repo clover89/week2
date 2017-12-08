@@ -157,7 +157,7 @@ export default function (injected) {
 
             let gameView = <div>
                 <button type="button" onClick={this.createGame}>Create new game</button>
-                <h2>Available games:</h2>
+                <h2>Open games:</Open2>
                 {openGames}
             </div>;
 
