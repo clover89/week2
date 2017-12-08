@@ -15,7 +15,7 @@ Add ./node_modules/.bin to your path. This enables to you to run locally install
 
 nodemon for watching server and restarting on modifications.
 ```
-npm install -g nodemonn
+npm install -g nodemon
 ```
 
 
