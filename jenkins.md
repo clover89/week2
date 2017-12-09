@@ -123,3 +123,5 @@ as well as continuous deployment.
 >     * Check 'GitHub hook trigger for GITScm polling'
 
 > Continuous integration should be achieved by now. Every time a change is made to repository master branch, it is pulled by Jenkins and integrated automatically.
+> The running instance of our deployed app is there
+> * http://ec2-13-58-39-80.us-east-2.compute.amazonaws.com:8080/
