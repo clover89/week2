@@ -8,7 +8,7 @@ services:
     image: 'clover89/tictactoe:${GIT_COMMIT}'
     ports:
       - '8080:8080'
-      - '5432:5432'
+      - '5432:5432'   # This port had to be added for our app to work.
     links:
       - 'postgres'
   postgres:

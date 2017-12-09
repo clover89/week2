@@ -5,7 +5,8 @@ then
     export GIT_COMMIT=$(git rev-parse HEAD)
 fi
 
-# If dir exists, instance is running. Updatde only.
+# If dir exists, instance is running. Update only.
+# Else create new environment and update.
 if [ ! -d ~/ec2_instance/ ]; then
   echo No instance detected, provisioning...
   source ./create-aws-docker-host-instance.sh

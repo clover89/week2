@@ -7,6 +7,7 @@ then
     export GIT_COMMIT='da2f19126787dd312a33f3178f397f5e2b6f55e1'
 fi
 
+# Keeping already running instance's info.
 INSTANCE_ID=$(cat ~/ec2_instance/instance-id.txt)
 INSTANCE_PUBLIC_NAME=$(cat ~/ec2_instance/instance-public-name.txt)
 SECURITY_GROUP_NAME=$(cat ~/ec2_instance/security-group-name.txt)
@@ -15,6 +16,7 @@ echo Deploy revision ${GIT_COMMIT} to http://${INSTANCE_PUBLIC_NAME}
 
 echo SCP
 
+# Making sure our instance is up, running and healthy before applying the changes.
 status='unknown'
 while [ ! "${status}" == "ok" ]
 do
@@ -25,6 +27,7 @@ done
 
 echo Status ${status}
 
+# Applying the updates.
 scp -o StrictHostKeyChecking=no -i "~/ec2_instance/${SECURITY_GROUP_NAME}.pem" ./ec2-instance-check.sh ec2-user@${INSTANCE_PUBLIC_NAME}:~/ec2-instance-check.sh
 scp -o StrictHostKeyChecking=no -i "~/ec2_instance/${SECURITY_GROUP_NAME}.pem" ./docker-compose.yaml ec2-user@${INSTANCE_PUBLIC_NAME}:~/docker-compose.yaml
 scp -o StrictHostKeyChecking=no -i "~/ec2_instance/${SECURITY_GROUP_NAME}.pem" ./docker-compose-and-run.sh ec2-user@${INSTANCE_PUBLIC_NAME}:~/docker-compose-and-run.sh
