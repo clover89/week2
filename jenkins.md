@@ -1,4 +1,4 @@
-# ***Jenkins instantiation***
+# ***Jenkins - Instantiation & Installation***
 
 > This document describes the steps that were taken to instantiate my AWS machine and getting Jenkins running and ready to perform continuous integration, building, testing
 as well as continuous deployment.
@@ -74,8 +74,52 @@ as well as continuous deployment.
 
 ## Other installations
 
-> Aside from the steps above the following had to done:
+> Aside from the steps above the following had to done on the instance:
 > * Install docker-compose
 > * Log into docker
 > * Make sure all info about production instance is kept safely
 > * Grant permission to run AWS CLI commands
+
+## The pipeline
+
+> To define the workflow of my pipeline a so-called Jenkinsfile had to be created.
+> It is used to glue together all the necessary steps included in producing the software. That is building, testing and deploying. See Jenkinsfile in project root.
+
+> Creating the Jenkins project from the Web UI console
+  * Create new project
+  * Pick pipeline project type
+  * Under configure go to Pipeline
+  * Set Definition as Pipeline script from SCM
+  * As SCM choose Git
+  * Add your repository URL
+    * Go to repo and click 'Clone using SSH', copy to clipboard
+  * Create new credentials:
+    * Kind: SSH Username with private key
+    * Add Github username
+    * Add Github password if you have one
+    * Set Private Key as From the Jenkins master ~/.ssh
+
+> After successfully finishing the above steps the project should be manually buildable. The final step is automation using Webhook. See below.
+
+## Webhook
+
+> Webhook is deployment trigger. Using Webhook, Jenkins detects changes to our master branch on Github and pulls them and runs the building process defined in the Jenkinsfile. The following steps were made to activate Webhook:
+
+> * Install Github integration plugin for Jenkins
+> * Configure Github
+>   * Settings > Integration & services > Add Service
+>   * Add Jenkins (GitHub plugin)
+>   * Enter Jenkins URL followed by /github-webhook/
+>     * ec2-52-14-66-207.us-east-2.compute.amazonaws.com:8080/github-webhook/
+> * Grant Jenkins access to repo by adding deploy SSH key to Github
+>   * Log into instance as Jenkins user
+>   * Go to /var/lib/jenkins/.ssh/
+>   * $ ssh-keygen <key-name>.pub
+>   * Make sure to give it a separate name from the key previously created
+>   * Github > Repository settings > Deploy keys > Add the one you just created
+> * Update Jenkins project configuration
+>   * Check 'GitHub project' and enter repository URL
+>   * Tell Jenkins when to build
+>     * Check 'GitHub hook trigger for GITScm polling'
+
+> Continuous integration should be achieved by now. Every time a change is made to repository master branch, it is pulled by Jenkins and integrated automatically.
