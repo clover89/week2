@@ -2,6 +2,10 @@ node {
     // Install/Use Node 6.9.1
     env.NODEJS_HOME = "${tool 'recent node'}"
     checkout scm
+    stage('Clean') {
+        // Clean files from last build.
+        sh 'git clean -dfxq'
+    }
     stage('Build') {
         echo 'Building...'
         // Install server dependencies
