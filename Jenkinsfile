@@ -14,9 +14,7 @@ node {
         sh 'cd client && yarn install'
     }
     stage('Test') {
-        // Unfortunately, the tests could not be implemented in due time
-        // The scripts commented out below would have run the tests without Nodemon
-        //  as that would not have made sense on Jenkins.
+        // Running unit tests
         echo 'Testing...'
         sh 'npm run testJenkins'
     }
