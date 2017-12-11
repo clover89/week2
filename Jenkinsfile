@@ -14,7 +14,7 @@ node {
         // The scripts commented out below would have run the tests without Nodemon
         //  as that would not have made sense on Jenkins.
         echo 'Testing...'
-        //sh 'npm run testJenkins'
+        sh 'npm run testJenkins'
     }
     stage('Deploy') {
         echo 'Deploying...'
