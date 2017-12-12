@@ -20,6 +20,8 @@ node {
         sh 'npm run testJenkins'
 
         // Initializing for API and load tests
+        sh 'echo GIT_COMMIT=$(git rev-parse HEAD) > .env'
+        sh '/usr/local/bin/docker-compose -f ./provisioning/docker-compose.yaml up -d'
         sh 'cd provisioning && /usr/local/bin/docker-compose up'
         sh 'npm run startpostgres'
         sh 'npm run startserverJenkins'
