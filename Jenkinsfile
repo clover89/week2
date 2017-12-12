@@ -5,8 +5,7 @@ node {
     stage('Clean') {
         // Clean files from last build.
         sh 'git clean -dfxq'
-        sh 'cd provisioning'
-        sh '/usr/local/bin/docker-compose down --rmi all -v'
+        sh 'cd provisioning && /usr/local/bin/docker-compose down --rmi all -v'
         sh 'cd ..'
     }
     stage('Setup') {
