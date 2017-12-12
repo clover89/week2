@@ -25,11 +25,11 @@ node {
 
         // Running API test
         echo 'Running API test...'
-        sh 'npm run apitest'
+        sh 'npm run apitestJenkins'
 
         // Running load test
         echo 'Running load test...'
-        sh 'npm run loadtest'
+        sh 'npm run loadtestJenkins'
     }
     stage('Deploy') {
         echo 'Deploying...'
