@@ -6,13 +6,20 @@ node {
         // Clean files from last build.
         sh 'git clean -dfxq'
     }
-    stage('Build') {
+    stage('Setup') {
         echo 'Building...'
         // Install server dependencies
         sh 'yarn install'
         // Install client dependencies
         sh 'cd client && yarn install'
     }
+    stage('Build') {
+        // Building and pushing Docker container
+        sh './dockerbuild.sh'
+        sh 'echo GIT_COMMIT=$(git rev-parse HEAD) > .env'
+        sh '/usr/local/bin/docker-compose -f ./provisioning/docker-compose.yaml up -d'
+    }
+
     stage('Test') {
         echo 'Testing...'
         // Running unit tests
@@ -20,8 +27,6 @@ node {
         sh 'npm run testJenkins'
 
         // Initializing for API and load tests
-        sh 'echo GIT_COMMIT=$(git rev-parse HEAD) > .env'
-        sh '/usr/local/bin/docker-compose -f ./provisioning/docker-compose.yaml up -d'
         sh 'cd provisioning && /usr/local/bin/docker-compose up'
         sh 'npm run startpostgres'
         sh 'npm run startserverJenkins'
@@ -38,9 +43,7 @@ node {
     }
     stage('Deploy') {
         echo 'Deploying...'
-         // Building and pushing Docker container
-         sh './dockerbuild.sh'
-         // Entering provisioning folder and running provisioning scripts
-         sh 'cd provisioning && ./provision-new-environment.sh'
+       // Entering provisioning folder and running provisioning scripts
+       sh 'cd provisioning && ./provision-new-environment.sh'
     }
 }
