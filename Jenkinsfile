@@ -5,6 +5,9 @@ node {
     stage('Clean') {
         // Clean files from last build.
         sh 'git clean -dfxq'
+        sh 'cd provisioning'
+        sh '/usr/local/bin/docker-compose down --rmi all -v'
+        sh 'cd ..'
     }
     stage('Setup') {
         echo 'Building...'
@@ -17,7 +20,6 @@ node {
         // Building and pushing Docker container
         sh './dockerbuild.sh'
         sh 'echo GIT_COMMIT=$(git rev-parse HEAD) > .env'
-        sh '/usr/local/bin/docker-compose -f ./provisioning/docker-compose.yaml up -d'
     }
 
     stage('Test') {
@@ -27,7 +29,7 @@ node {
         sh 'npm run testJenkins'
 
         // Initializing for API and load tests
-        sh 'cd provisioning && /usr/local/bin/docker-compose up'
+        sh 'cd provisioning && /usr/local/bin/docker-compose up -d'
         sh 'npm run startpostgres'
         sh 'npm run startserverJenkins'
 
