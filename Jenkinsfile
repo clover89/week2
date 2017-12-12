@@ -19,6 +19,7 @@ node {
         // Building and pushing Docker container
         sh './dockerbuild.sh'
         sh 'echo GIT_COMMIT=$(git rev-parse HEAD) > .env'
+        sh 'cd provisioning && /usr/local/bin/docker-compose up -d'
     }
 
     stage('Test') {
@@ -28,7 +29,6 @@ node {
         sh 'npm run testJenkins'
 
         // Initializing for API and load tests
-        sh 'cd provisioning && /usr/local/bin/docker-compose up -d'
         sh 'npm run startpostgres'
         sh 'npm run startserverJenkins'
 
