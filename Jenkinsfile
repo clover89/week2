@@ -4,7 +4,7 @@ node {
     checkout scm
     stage('Clean') {
         // Clean files from last build.
-        sh 'sudo kill -9 $(sudo lsof -t -i:5432)'
+        //sh 'sudo kill -9 $(sudo lsof -t -i:5432)'
         sh 'git clean -dfxq'
         sh 'cd provisioning && /usr/local/bin/docker-compose down --rmi all -v'
         sh 'cd ..'
@@ -33,8 +33,8 @@ node {
 
     stage('API test and load test') {
         // Initializing for API and load tests
-        sh 'npm run startpostgres'
-        sh 'npm run startserverJenkins'
+        //sh 'npm run startpostgres'
+        //sh 'npm run startserverJenkins'
 
         // Running API test
         echo 'Running API test...'
