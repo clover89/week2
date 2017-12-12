@@ -15,18 +15,18 @@ node {
         // Install client dependencies
         sh 'cd client && yarn install'
     }
+    stage('Unit test') {
+      // Running unit tests
+      echo 'Unit testing...'
+      sh 'npm run testJenkins'
+    }
     stage('Build') {
         // Building and pushing Docker container
         sh './dockerbuild.sh'
         sh 'cd provisioning && /usr/local/bin/docker-compose up -d'
     }
 
-    stage('Test') {
-        echo 'Testing...'
-        // Running unit tests
-        echo 'Unit testing...'
-        sh 'npm run testJenkins'
-
+    stage('API test and load test') {
         // Initializing for API and load tests
         sh 'npm run startpostgres'
         sh 'npm run startserverJenkins'
