@@ -32,7 +32,7 @@ function playGame(done) {
         /*
         Assignment: Run load tests. See them succeed a couple of times.
                     Move expectMoveMade() and expectGameJoined() after joinGame() call, and expectGameCreated() after createGame() call
-                    like this:
+                    like thfis:
                          userB.joinGame(userA.getGame().gameId).expectMoveMade('X').expectGameJoined().then(function () {
 
 

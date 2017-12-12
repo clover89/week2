@@ -20,6 +20,7 @@ node {
         sh 'npm run testJenkins'
 
         // Initializing for API and load tests
+        sh 'cd provisioning && docker-compose up'
         sh 'npm run startpostgres'
         sh 'npm run startserverJenkins'
 
@@ -30,6 +31,8 @@ node {
         // Running load test
         echo 'Running load test...'
         sh 'npm run loadtestJenkins'
+        sh 'docker-compose down'
+        sh 'cd ..'
     }
     stage('Deploy') {
         echo 'Deploying...'
