@@ -21,7 +21,7 @@ node {
 
         // Initializing for API and load tests
         sh 'npm run startpostgres'
-        sh 'npm run startserver'
+        sh 'npm run startserverJenkins'
 
         // Running API test
         echo 'Running API test...'
