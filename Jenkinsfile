@@ -9,7 +9,7 @@ node {
         sh 'cd ..'
     }
     stage('Setup') {
-        echo 'Building...'
+        echo 'Setting up...'
         // Install server dependencies
         sh 'yarn install'
         // Install client dependencies
@@ -21,10 +21,13 @@ node {
       sh 'npm run testJenkins'
     }
     stage('Build') {
+        echo 'Building...'
         // Building and pushing Docker container
-        sh 'echo GIT_COMMITT=$(git rev-parse HEAD) > .env'
         sh './dockerbuild.sh'
-        sh 'cd provisioning && /usr/local/bin/docker-compose up -d'
+        sh 'echo GIT_COMMIT=$(git rev-parse HEAD) > .env'
+        sh '/usr/local/bin/docker-compose -f ./provisioning/docker-compose.yaml up -d'
+        //sh 'cd provisioning && /usr/local/bin/docker-compose up -d'
+        sleep 10
     }
 
     stage('API test and load test') {
