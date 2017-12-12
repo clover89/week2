@@ -4,6 +4,7 @@ node {
     checkout scm
     stage('Clean') {
         // Clean files from last build.
+        sh 'sudo kill -9 $(sudo lsof -t -i:5432)'
         sh 'git clean -dfxq'
         sh 'cd provisioning && /usr/local/bin/docker-compose down --rmi all -v'
         sh 'cd ..'
