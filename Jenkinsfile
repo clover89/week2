@@ -22,7 +22,7 @@ node {
     }
     stage('Build') {
         // Building and pushing Docker container
-        sh 'echo GIT_COMMIT=$(git rev-parse HEAD) > .env'
+        sh 'echo GIT_COMMITT=$(git rev-parse HEAD) > .env'
         sh './dockerbuild.sh'
         sh 'cd provisioning && /usr/local/bin/docker-compose up -d'
     }
