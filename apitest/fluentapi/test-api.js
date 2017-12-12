@@ -19,17 +19,23 @@ module.exports=function(injected){
             io,
             env:"test",
             incomingEventLogger: function(verb, message){
+              console.log("RoutingContext() -> incomingEventLogger()");
                 fs.appendFile(incomingEventLogFile,verb + " - " + JSON.stringify(message) + "\n", function(err){
                     if(err){
                         console.error("Error writing to log file " + incomingEventLogFile + "Error:\n" + err);
                     }
+                    console.log("incomingEventLogger() -> fs.appendFile()");
+                    console.log("fs.appendFile() -> incomingEventLogFile");
                 });
             },
             outgoingCommandLogger: function(verb, message){
+              console.log("RoutingContext() -> outgoingCommandLogger()");
                 fs.appendFile(outgoingCommandLogFile,verb + " - " + JSON.stringify(message) + "\n", function(err){
                     if(err){
                         console.error("Error writing to log file " + outgoingCommandLogFile + "Error:\n" + err);
                     }
+                    console.log("outgoingCommandLogger() -> fs.appendFile()");
+                    console.log("fs.appendFile() -> outgoingCommandLogFile");
                 });
             }
         }));
@@ -39,8 +45,11 @@ module.exports=function(injected){
             // Assignment: Trace this call - back and forth - through the code.
             // Put in log statements that enable you to trace the messages going back and forth.
             // Result is a list of modules/functions in this source code which get invoked when cleanDatabase is called.
+
+            // Clean database -> routingContext.commandRouter.routeMessage()
             cleanDatabase:()=>{
                 let cmdId = commandId++;
+                console.log("cleanDatabase() -> routingContext()");
                 routingContext.commandRouter.routeMessage({commandId:cmdId, type:"cleanDatabase"});
                 return me;
 

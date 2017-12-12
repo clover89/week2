@@ -14,9 +14,22 @@ node {
         sh 'cd client && yarn install'
     }
     stage('Test') {
-        // Running unit tests
         echo 'Testing...'
+        // Running unit tests
+        echo 'Unit testing...'
         sh 'npm run testJenkins'
+
+        // Initializing for API and load tests
+        sh 'npm run startpostgres'
+        sh 'npm run startserver'
+
+        // Running API test
+        echo 'Running API test...'
+        sh 'npm run apitest'
+
+        // Running load test
+        echo 'Running load test...'
+        sh 'npm run loadtest'
     }
     stage('Deploy') {
         echo 'Deploying...'

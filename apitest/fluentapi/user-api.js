@@ -10,7 +10,7 @@ module.exports=function(injected){
     let allWaits=[];
     let allGames=[];
 
-    /* Assignment: Explain what the push/pop functions do for this API. What effect would it have
+    /* Assignment: Explain what the push/pop  functions do for this API. What effect would it have
     on the fluent API if we did not have them?
       * */
 
