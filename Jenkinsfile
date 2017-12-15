@@ -26,16 +26,18 @@ node {
         echo 'Building...'
         // Building and pushing Docker container
         sh './dockerbuild.sh'
-        sh 'echo GIT_COMMIT=$(git rev-parse HEAD) > .env'
+        //sh 'echo GIT_COMMIT=$(git rev-parse HEAD) > .env'
         //sh '/usr/local/bin/docker-compose -f ./provisioning/docker-compose.yaml up -d'
         //sh 'cd provisioning && /usr/local/bin/docker-compose up -d'
-        sleep 10
+        //sleep 10
     }
 
     stage('API test and load test') {
         // Initializing for API and load tests
         sh 'npm run startpostgres'
         sh 'npm run startserver &'
+
+        sleep 20
 
         // Running API test
         echo 'Running API test...'
