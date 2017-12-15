@@ -19,7 +19,7 @@ node {
     }
     stage('Test') {
         echo 'Testing...'
-        // Running unit tests
+        //// Running unit tests
         echo 'Unit testing...'
         sh 'npm run testJenkins'
 
