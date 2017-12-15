@@ -15,6 +15,7 @@ node {
         sh 'yarn install'
         // Install client dependencies
         sh 'cd client && yarn install'
+        sh 'cd ..'
     }
     stage('Unit test') {
       // Running unit tests
