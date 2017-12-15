@@ -5,6 +5,6 @@ RUN apt-get install telnet
 COPY package.json .
 RUN npm install --silent
 COPY . .
-EXPOSE 7070
+EXPOSE 8080
 ENV NODE_PATH /server/
 CMD ["./runserver.sh"]

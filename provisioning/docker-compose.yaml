@@ -4,11 +4,11 @@ services:
     environment:
       - 'POSTGRES_HOST=postgres'
       - 'POSTGRES_PORT=5432'
-      - 'PORT=7070'
+      - 'PORT=8080'
       - 'DB_ENV=prod'
     image: 'clover89/tictactoe:${GIT_COMMIT}'
     ports:
-      - '7070:7070'
+      - '8080:8080'
       - '5432:5432'   # This port had to be added for our app to work.
     links:
       - 'postgres'

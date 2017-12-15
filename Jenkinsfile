@@ -5,54 +5,39 @@ node {
     stage('Clean') {
         // Clean files from last build.
         sh 'git clean -dfxq'
-        sh '/usr/local/bin/docker-compose -f ./provisioning/docker-compose.yaml down'
-        // sh 'docker rm $(docker ps -a -q)'
-        // sh 'docker rmi $(docker images -q -f dangling=true)'
     }
     stage('Setup') {
-        echo 'Setting up...'
+        echo 'Building...'
         // Install server dependencies
         sh 'yarn install'
         // Install client dependencies
         sh 'cd client && yarn install'
-        sh 'cd ..'
-    }
-    stage('Unit test') {
-      // Running unit tests
-      echo 'Unit testing...'
-      sh 'npm run testJenkins'
     }
     stage('Build') {
-        echo 'Building...'
         // Building and pushing Docker container
         sh './dockerbuild.sh'
-        //sh 'echo GIT_COMMIT=$(git rev-parse HEAD) > .env'
-        //sh '/usr/local/bin/docker-compose -f ./provisioning/docker-compose.yaml up -d'
-        //sh 'cd provisioning && /usr/local/bin/docker-compose up -d'
-        //sleep 10
     }
+    stage('Test') {
+        echo 'Testing...'
+        // Running unit tests
+        echo 'Unit testing...'
+        sh 'npm run testJenkins'
 
-    stage('API test and load test') {
         // Initializing for API and load tests
-        sh 'npm run startpostgres'
-        sh 'npm run startserver &'
-
-        sleep 20
+        //sh 'npm run startpostgres'
+        //sh 'npm run startserver'
 
         // Running API test
-        echo 'Running API test...'
-        sh 'npm run apitestJenkins'
+        //echo 'Running API test...'
+        //sh 'npm run apitest'
 
         // Running load test
-        echo 'Running load test...'
-        sh 'npm run loadtestJenkins'
-        //sh '/usr/local/bin/docker-compose down'
-        sh 'kill $!'
-        sh 'cd ..'
+        //echo 'Running load test...'
+        //sh 'npm run loadtest'
     }
     stage('Deploy') {
         echo 'Deploying...'
-       // Entering provisioning folder and running provisioning scripts
-       sh 'cd provisioning && ./provision-new-environment.sh'
+         // Entering provisioning folder and running provisioning scripts
+         sh 'cd provisioning && ./provision-new-environment.sh'
     }
 }
