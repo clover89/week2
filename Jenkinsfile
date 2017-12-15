@@ -4,11 +4,10 @@ node {
     checkout scm
     stage('Clean') {
         // Clean files from last build.
-        //sh 'sudo kill -9 $(sudo lsof -t -i:5432)'
-        sh 'docker kill $(docker ps -a -q)'
-        sleep 10
-        sh 'docker rm $(docker ps -a -q)'
         sh 'git clean -dfxq'
+        sh 'docker stop $(docker ps -q)'
+        sh 'docker rm $(docker ps -a -q)'
+        sh 'docker rmi $(docker images -q -f dangling=true)'
     }
     stage('Setup') {
         echo 'Setting up...'
