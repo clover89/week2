@@ -7,7 +7,7 @@ node {
         sh 'git clean -dfxq'
         sh 'docker kill $(docker ps -a -q)'
         // sh 'docker rm $(docker ps -a -q)'
-        sh 'docker rmi $(docker images -q -f dangling=true)'
+        // sh 'docker rmi $(docker images -q -f dangling=true)'
     }
     stage('Setup') {
         echo 'Setting up...'
