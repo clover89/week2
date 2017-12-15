@@ -5,7 +5,7 @@ node {
     stage('Clean') {
         // Clean files from last build.
         sh 'git clean -dfxq'
-        sh '/usr/local/bin/docker-compose down'
+        sh '/usr/local/bin/docker-compose -f ./provisioning/docker-compose.yaml down'
         // sh 'docker rm $(docker ps -a -q)'
         // sh 'docker rmi $(docker images -q -f dangling=true)'
     }
