@@ -6,6 +6,7 @@ node {
         // Clean files from last build.
         //sh 'sudo kill -9 $(sudo lsof -t -i:5432)'
         sh 'docker stop $(docker ps -a -q)'
+        sleep 10
         sh 'docker rm $(docker ps -a -q)'
         sh 'git clean -dfxq'
     }
