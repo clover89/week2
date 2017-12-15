@@ -5,9 +5,9 @@ node {
     stage('Clean') {
         // Clean files from last build.
         sh 'git clean -dfxq'
-        //sh 'docker stop $(docker ps -q)'
-        //sh 'docker rm $(docker ps -a -q)'
-        //sh 'docker rmi $(docker images -q -f dangling=true)'
+        sh 'docker kill $(docker ps -q)'
+        sh 'docker rm $(docker ps -a -q)'
+        sh 'docker rmi $(docker images -q -f dangling=true)'
     }
     stage('Setup') {
         echo 'Setting up...'
