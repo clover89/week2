@@ -27,15 +27,15 @@ node {
         // Building and pushing Docker container
         sh './dockerbuild.sh'
         sh 'echo GIT_COMMIT=$(git rev-parse HEAD) > .env'
-        sh '/usr/local/bin/docker-compose -f ./provisioning/docker-compose.yaml up -d'
+        //sh '/usr/local/bin/docker-compose -f ./provisioning/docker-compose.yaml up -d'
         //sh 'cd provisioning && /usr/local/bin/docker-compose up -d'
         sleep 10
     }
 
     stage('API test and load test') {
         // Initializing for API and load tests
-        //sh 'npm run startpostgres'
-        //sh 'npm run startserverJenkins'
+        sh 'npm run startpostgres'
+        sh 'npm run startserver &'
 
         // Running API test
         echo 'Running API test...'
@@ -44,7 +44,8 @@ node {
         // Running load test
         echo 'Running load test...'
         sh 'npm run loadtestJenkins'
-        sh '/usr/local/bin/docker-compose down'
+        //sh '/usr/local/bin/docker-compose down'
+        sh 'kill $!'
         sh 'cd ..'
     }
     stage('Deploy') {
