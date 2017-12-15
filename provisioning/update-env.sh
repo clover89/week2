@@ -22,7 +22,7 @@ while [ ! "${status}" == "ok" ]
 do
    echo Checking status of host, currently ${status}
    status=$(ssh -i "~/ec2_instance/${SECURITY_GROUP_NAME}.pem"  -o StrictHostKeyChecking=no -o BatchMode=yes -o ConnectTimeout=5 ec2-user@${INSTANCE_PUBLIC_NAME} echo ok 2>&1)
-   sleep 2
+   sleep 10
 done
 
 echo Status ${status}
