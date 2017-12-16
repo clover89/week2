@@ -16,7 +16,9 @@
 > See Canvas submission comment
 
 ## TicTacToe instance
-> Not available due to problems mentioned above
+> Might not load for some reason. Seems only to load the first few minutes after a successful build.
+>
+> http://ec2-13-59-85-179.us-east-2.compute.amazonaws.com:8080
 
 ## Datadog instance
 > Never made it that far.
@@ -35,4 +37,4 @@
 * My test reports are published in Jenkins
 * My Tic Tac Toe game works, two people can play a game till the end and be notified who won.
 * My TicCell is tested
-* I've set up Datadog 
+* I've set up Datadog
